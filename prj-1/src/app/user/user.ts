@@ -52,7 +52,6 @@ import { type UserType } from './user.model';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
-
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -81,7 +80,8 @@ export class User {
   imagePath = computed(() => `assets/users/${this.avatar()}`); */
 
   // ! near avatar tells TS that we know that this property will be initialized later, so it won't be undefined
-  @Input({ required: true }) user: UserType = { id: '', avatar: '', name: '' };
+  @Input({ required: true }) user!: UserType;
+  @Input({ required: true }) selected!: boolean;
 
   @Output() select = new EventEmitter<string>(); // Extra security to ensure that the output is always a string
 
