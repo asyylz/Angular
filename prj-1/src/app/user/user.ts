@@ -48,9 +48,11 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { DUMMY_USERS } from '../../dummy-users';
-import { DUMMY_TASKS } from '../../dummy-task';
+import { type UserType } from './user.model';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+
+
 @Component({
   selector: 'app-user',
   standalone: true,
@@ -79,18 +81,16 @@ export class User {
   imagePath = computed(() => `assets/users/${this.avatar()}`); */
 
   // ! near avatar tells TS that we know that this property will be initialized later, so it won't be undefined
-  @Input({ required: true }) id!: string;
-  @Input({ required: true }) avatar!: string;
-  @Input({ required: true }) name!: string;
+  @Input({ required: true }) user: UserType = { id: '', avatar: '', name: '' };
 
   @Output() select = new EventEmitter<string>(); // Extra security to ensure that the output is always a string
 
   get imagePath() {
-    return `assets/users/${this.avatar}`;
+    return `assets/users/${this.user.avatar}`;
   }
 
   onSelectUser() {
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
     // this.task = this.tasks.find((task) => task.userId === this.id)?.title || '';
     // const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
     // this.selectedUser.set(DUMMY_USERS[randomIndex]);
