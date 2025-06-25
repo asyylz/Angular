@@ -1,7 +1,3 @@
-import { Component, signal, computed } from '@angular/core';
-import { DUMMY_USERS } from '../../dummy-users';
-
-
 /* 🧠 Angular, Zones, and Signals: The Big Picture
 
 ✅ 1. Angular’s Default Change Detection (with Zones)
@@ -39,6 +35,21 @@ Feature	Zone-based (NgZone)	Signals (@angular/core)
 🧠 Reactive tracking	Implicit (zone triggers CD)	Explicit (you read/write signals)
 ❌ Drawbacks	Can be slow in big apps	Still maturing (as of Angular 17) */
 
+// Input with uppercase is decorator , lowercase is a special function as signal
+
+import {
+  Component,
+  signal,
+  computed,
+  Input,
+  input,
+  Output,
+  output,
+  EventEmitter,
+} from '@angular/core';
+import { DUMMY_USERS } from '../../dummy-users';
+import { DUMMY_TASKS } from '../../dummy-task';
+
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 @Component({
   selector: 'app-user',
@@ -50,15 +61,39 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
 // So all the properties we are defining in our componnet  class here are avilable in the tremplate of the component that is core feature of angular
 export class User {
+  /*   Initial Priject base
   selectedUser = signal(DUMMY_USERS[randomIndex]);
   imagePath= computed(()=>'assets/users/' + this.selectedUser().avatar);
 
-  // get imagePath() {
-  //   return `assets/users/${this.selectedUser.avatar}`;
-  // }
+  get imagePath() {
+    return `assets/users/${this.selectedUser.avatar}`;
+  } */
+
+  /*   // Signal input approach
+  avatar = input.required<string>();
+  name = input.required<string>();
+  Modern approach of output similar to input signal  but it is not signal, it does not create a signal, 
+  it is just a way to create an event emitter
+  select =output<string>();
+  Using signal to make the imagePath reactive
+  imagePath = computed(() => `assets/users/${this.avatar()}`); */
+
+  // ! near avatar tells TS that we know that this property will be initialized later, so it won't be undefined
+  @Input({ required: true }) id!: string;
+  @Input({ required: true }) avatar!: string;
+  @Input({ required: true }) name!: string;
+
+  @Output() select = new EventEmitter<string>(); // Extra security to ensure that the output is always a string
+
+  get imagePath() {
+    return `assets/users/${this.avatar}`;
+  }
+
   onSelectUser() {
-    const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
-    this.selectedUser.set(DUMMY_USERS[randomIndex]);
+    this.select.emit(this.id);
+    // this.task = this.tasks.find((task) => task.userId === this.id)?.title || '';
+    // const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+    // this.selectedUser.set(DUMMY_USERS[randomIndex]);
     // this.selectedUser=DUMMY_USERS[randomIndex];
   }
 }

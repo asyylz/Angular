@@ -1,8 +1,53 @@
+<!-- 
+ 🔍 This $event variable is not just available when working with custom events! It can be used on built-in  events ( like"click)
+  to get hold of potentially emitted values. 
+ 🔍 this.select.emit(this.id) in the child triggers the select event with payload id. (select)="onSelectUser($event)" 
+ listens for that event in the parent and receives the id as $event.
+-->
+
 <app-header />
 <main>
   <ul id="users">
     <li>
-      <app-user />
+      <app-user
+        [id]="users[0].id"
+        [avatar]="users[0].avatar"
+        [name]="users[0].name"
+        (select)="onSelectUser($event)"
+      />
+    </li>
+    <li>
+      <app-user
+        [id]="users[1].id"
+        [avatar]="users[1].avatar"
+        [name]="users[1].name"
+        (select)="onSelectUser($event)"
+      />
+    </li>
+    <li>
+      <app-user
+        [id]="users[2].id"
+        [avatar]="users[2].avatar"
+        [name]="users[2].name"
+        (select)="onSelectUser($event)"
+      />
+    </li>
+    <li>
+      <app-user
+        [id]="users[3].id"
+        [avatar]="users[3].avatar"
+        [name]="users[3].name"
+        (select)="onSelectUser($event)"
+      />
+    </li>
+    <li>
+      <app-user
+        [id]="users[4].id"
+        [avatar]="users[4].avatar"
+        [name]="users[4].name"
+        (select)="onSelectUser($event)"
+      />
     </li>
   </ul>
+  <app-tasks [name]="selectedUser.name" />
 </main>
