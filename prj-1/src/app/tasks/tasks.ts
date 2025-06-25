@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Task } from './task/task';
 import { NewTask } from './new-task/new-task';
+import { TaskService } from './tasks.service';
+import { NewTaskDataType } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -12,44 +14,22 @@ export class Tasks {
   @Input({ required: true }) userId!: string;
   @Input({ required: true }) name!: string;
   isAddingTask: boolean = false;
+  // private tasksService: TaskService;  // short-hand notation for the service below inside the constructor
 
-  tasks = [
-    {
-      id: 't1',
-      userId: 'u1',
-      title: 'Task 1',
-      summary: 'Description for Task 1',
-      duedate: '2023-10-01',
-    },
-    {
-      id: 't2',
-      userId: 'u2',
-      title: 'Task 2',
-      summary: 'Description for Task 2',
-      duedate: '2023-10-01',
-    },
-    {
-      id: 't3',
-      userId: 'u3',
-      title: 'Task 3',
-      summary: 'Description for Task 3',
-      duedate: '2023-10-01',
-    },
-  ];
-
-  get selectedUserTasks() {
-    return this.tasks.filter((task) => task.userId === this.userId);
+  // You tell Angular which type of value you need and Angular creates it and provides it as an Argument.
+  constructor( private tasksService: TaskService) {
+    this.tasksService = tasksService;
   }
 
-  onCompleteTask(id: string) {
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+  get selectedUserTasks() {
+    return this.tasksService.getUserTasks(this.userId);
   }
 
   onStartAddTask() {
     this.isAddingTask = true;
   }
 
-  onCancelAddingTask() {
+  onCloseAddingTask() {
     this.isAddingTask = false;
   }
 }
