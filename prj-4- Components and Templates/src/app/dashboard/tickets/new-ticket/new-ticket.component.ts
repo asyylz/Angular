@@ -5,6 +5,7 @@ import {
   viewChild,
   OnInit,
   ViewChild,
+  output,
 } from '@angular/core'
 
 import { ButtonComponent } from '../../../shared/button/button.component'
@@ -23,6 +24,9 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
   // Must select template variable name without hash
   @ViewChild('form') private form?: ElementRef<HTMLFormElement>
 
+  // @Output() add = new EventEmitter<{title: string; text: string}>();
+  add = output<{ title: string; text: string }>()
+
   // private form = viewChild.required<ElementRef<HTMLFormElement>>('form')
   ngOnInit() {
     console.log('On init')
@@ -30,8 +34,7 @@ export class NewTicketComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit(title: string, ticketText: string) {
-    console.log(title)
-    console.log(ticketText)
+    this.add.emit({ title: title, text: ticketText })
     this.form?.nativeElement.reset()
   }
   ngAfterViewInit() {
