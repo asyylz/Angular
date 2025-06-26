@@ -9,8 +9,8 @@ import { Tasks } from './tasks/tasks';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [Header, User, Tasks], // We are registering the header component here
+   standalone: false,
+  // imports: [Header, User, Tasks], // We are registering the header component here
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

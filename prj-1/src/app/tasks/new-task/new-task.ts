@@ -5,8 +5,8 @@ import { NewTaskDataType } from '../task/task.model';
 import { TaskService } from '../tasks.service';
 @Component({
   selector: 'app-new-task',
-  standalone: true,
-  imports: [FormsModule],
+  standalone: false,
+  // imports: [FormsModule],
   templateUrl: './new-task.html',
   styleUrl: './new-task.css',
 })

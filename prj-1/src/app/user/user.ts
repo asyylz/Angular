@@ -55,8 +55,8 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 
 @Component({
   selector: 'app-user',
-  standalone: true,
-  imports: [Card],
+  standalone: false,
+  // imports: [Card],
   templateUrl: './user.html',
   styleUrl: './user.css',
 })
