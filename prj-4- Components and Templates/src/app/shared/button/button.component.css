@@ -1,3 +1,4 @@
+/* The component host element is NOT considered a part of the component template but will be affected by the (scoped) component styles via host */
 :host {
   display: inline-block;
   padding: 0.65rem 1.35rem;
@@ -23,3 +24,4 @@
 :host:hover .icon {
   transform: translateX(4px);
 }
+
