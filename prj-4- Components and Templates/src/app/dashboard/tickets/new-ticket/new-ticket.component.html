@@ -1,9 +1,9 @@
-<form (ngSubmit)="onSubmit(titleInput.value, textInput.value)">
+<form (ngSubmit)="onSubmit(titleInput.value, textInput.value)" #form>
   <app-control label="Title">
-    <input name="title" id="title" #titleInput />
+    <input name="title" id="title" #titleInput #input/>
   </app-control>
-  <app-control label="Request">
-    <textarea name="request" id="request" rows="3" #textInput></textarea>
+  <app-control label="Request" #ctrl>
+    <textarea name="request" id="request" rows="3" #textInput #input></textarea>
   </app-control>
   <p>
     <button appButton>
@@ -12,3 +12,14 @@
     </button>
   </p>
 </form>
+
+
+<!-- So we explored template variables and how you, for example, can use them to extract input values when the form is submitted as we're doing it here. But of course, you can use them and the access to DOM elements they give you in any way you need. What's worth noting about these template variables is that they
+00:00:23
+don't always give you access to the DOM element though here with title input, it is the HTML input element. We're getting access to and for the text input here, it's the HTL textarea element. But if I were to add a template variable to my button here,
+00:00:43
+maybe called BTN, then the type of value that's stored in that variable is button component, not HT ML button element. The latter would be the case if I would not have this app button attribute on the button
+00:01:01
+which turns this into an instance of my button component without it. It's not. And then indeed it is a HTML button element thates stored in that variable. But if I add that attribute Angular takes over control of that button, and in the end turns it into an instance of my button component
+00:01:24
+because my button component has that as a selector. And if that's the case, if you're dealing with an instance of a component you defined and you then place a template variable on that element in your template. So on that component -->

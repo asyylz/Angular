@@ -14,7 +14,7 @@ export class ServerStatusComponent implements OnInit {
 
   private destroyRef = inject(DestroyRef)
   ngOnInit() {
-    console.log('On init')
+
 
     const interval = setInterval(() => {
       const rnd = Math.random() // 0 - 0.9999999999999
