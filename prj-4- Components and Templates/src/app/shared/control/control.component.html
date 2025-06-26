@@ -1,0 +1,6 @@
+<p class="control">
+  <label>{{ label() }}</label>
+  <ng-content  select="input, textarea" />
+</p>
+
+<!-- Since angular only sees placeholder not actual input or textarea styles are not being reflected if they are scoped to component -->
