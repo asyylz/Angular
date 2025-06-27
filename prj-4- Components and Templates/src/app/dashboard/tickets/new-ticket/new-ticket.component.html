@@ -1,9 +1,20 @@
-<form (ngSubmit)="onSubmit(titleInput.value, textInput.value)" #form>
+<form (ngSubmit)="onSubmit()" #form>
   <app-control label="Title">
-    <input name="title" id="title" #titleInput #input/>
+    <input
+      name="title"
+      id="title"
+      #input
+      [(ngModel)]="enteredTitle"
+    />
   </app-control>
-  <app-control label="Request" #ctrl>
-    <textarea name="request" id="request" rows="3" #textInput #input></textarea>
+  <app-control label="Request">
+    <textarea
+      name="request"
+      id="request"
+      rows="3"
+      #input
+      [(ngModel)]="enteredText"
+    ></textarea>
   </app-control>
   <p>
     <button appButton>
@@ -12,7 +23,6 @@
     </button>
   </p>
 </form>
-
 
 <!-- So we explored template variables and how you, for example, can use them to extract input values when the form is submitted as we're doing it here. But of course, you can use them and the access to DOM elements they give you in any way you need. What's worth noting about these template variables is that they
 00:00:23

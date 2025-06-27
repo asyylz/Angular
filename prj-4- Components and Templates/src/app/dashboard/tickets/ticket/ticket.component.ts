@@ -11,9 +11,13 @@ import { Ticket } from '../ticket.model'
 })
 export class TicketComponent {
   data = input.required<Ticket>()
+  // data = input.required<Ticket>({transform:(value)=>}) Example changing type of data
+  // ticket = input.required<Ticket>({ alias: 'data' }) // Setting alias, we are just using property name but it is not recommended
+
   detailsVisible = signal(false)
   // @Output('closeTicket')
   close = output()
+  // close = output({alias:"closeTicket"}). //setting alias
 
   onToggleDetails() {
     // this.detailsVisible.set(!this.detailsVisible());
@@ -23,3 +27,4 @@ export class TicketComponent {
     this.close.emit()
   }
 }
+
